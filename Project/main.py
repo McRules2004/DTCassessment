@@ -7,6 +7,47 @@ V2
 
 from tkinter import *
 
+
+class Help:
+    def __init__(self, main_window):
+        self.main_window = main_window
+        background = "grey"
+        # making a popup and removing the main window
+        self.help_box = Toplevel()
+        self.help_box.title("Help")
+        main_window.withdraw()
+        self.help_box.protocol('WM_DELETE_WINDOW', self.close_help)
+
+        # design for the popup
+        self.help_frame = Frame(self.help_box, width=300, bg=background)
+        self.help_frame.grid()
+        self.how_heading = Label(self.help_frame, text="Help/Instructions",
+                                 font="arial 20 bold underline", bg=background, fg="black")
+        self.how_heading.grid(row=0)
+        self.help_text = Label(self.help_frame, text="", justify=LEFT,
+                               width=40, bg=background, wrap=250)
+        self.help_text.grid(row=1, )
+
+        # close the popup button making
+        self.exit_help_image = PhotoImage(file="../Project/images/exit.jpg")
+        self.forth_image = self.exit_help_image.subsample(50, 50)  # resize image using subsample
+        self.close_button = Button(self.help_frame, image=self.forth_image,
+                                   command=self.close_help).grid(row=0, pady=5,
+                                                                 padx=5, sticky=NW)
+
+    # function to close help popup
+    def close_help(self):
+        self.main_window.deiconify()  # making main window visible
+        self.help_box.destroy()
+
+
+# help box popup
+def help_popup(window):
+    get_help = Help(window)
+    get_help.help_text.configure(text="Help Text Here",
+                                 fg="white", font=("arial", "14"))
+
+
 def exitButton(frame):
     exit_image = PhotoImage(file="images/exit.jpg")
     exit_image2 = exit_image.subsample(50, 50)  # resize image using subsample
@@ -14,12 +55,14 @@ def exitButton(frame):
     exit_button.photo = exit_image2
     exit_button.grid(row=0, column=0, padx=2, pady=2, sticky=N)
 
+
 def helpButton(frame):
     help_image = PhotoImage(file="images/help.png")
     help_image2 = help_image.subsample(60, 60)  # resize image using subsample
-    help_button = Button(frame, image=help_image2)#, command=help_popup)
+    help_button = Button(frame, image=help_image2, command=lambda:help_popup(main_window))
     help_button.photo = help_image2
     help_button.grid(row=9, column=10)
+
 
 def createMenu(main_window):
     # Create Frame inside main window
@@ -30,7 +73,8 @@ def createMenu(main_window):
     # title
     title_image = PhotoImage(file="images/quiz.png")
     title_image2 = title_image.subsample(17, 17)  # resize image using subsample
-    title = Label(menu_frame, image=title_image2, text="Maths Quiz", font="Times 30 italic bold", fg="blue", compound=RIGHT)
+    title = Label(menu_frame, image=title_image2, text="Maths Quiz", font="Times 30 italic bold", fg="blue",
+                  compound=RIGHT)
     title.photo = title_image2
     title.grid(row=0, column=3, columnspan=5, pady=(10, 0))
 
@@ -55,6 +99,7 @@ def createMenu(main_window):
     extra_frame2.grid(column=9, row=0, rowspan=10)
     extra_frame3 = Frame(menu_frame, height=205, bg="grey")
     extra_frame3.grid(column=10, row=8)
+
 
 # create GUI
 main_window = Tk()
