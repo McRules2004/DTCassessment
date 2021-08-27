@@ -25,7 +25,7 @@ class Help:
         self.help_text.grid(row=1, )
 
         # close the popup button making
-        self.exit_help_image = PhotoImage(file="exit.jpg")
+        self.exit_help_image = PhotoImage(file="../Project/images/exit.jpg")
         self.forth_image = self.exit_help_image.subsample(50, 50)  # resize image using subsample
         self.close_button = Button(self.help_frame, image=self.forth_image,
                                    command=self.close_help).grid(row=0, pady=5,

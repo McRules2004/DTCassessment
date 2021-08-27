@@ -49,7 +49,7 @@ with open(full_path, 'w') as csvfile:
             self.help_text.grid(row=1, )
 
             # close the popup button making
-            self.exit_help_image = PhotoImage(file="exit.jpg")
+            self.exit_help_image = PhotoImage(file="../Project/images/exit.jpg")
             self.forth_image = self.exit_help_image.subsample(50, 50)  # resize image using subsample
             self.close_button = Button(self.help_frame, image=self.forth_image,
                                        command=self.close_help).grid(row=0, pady=5,
@@ -91,7 +91,7 @@ with open(full_path, 'w') as csvfile:
             self.menu_text.grid(row=1, )
 
             # close the popup button making
-            self.exit_menu_image = PhotoImage(file="exit.jpg")
+            self.exit_menu_image = PhotoImage(file="../Project/images/exit.jpg")
             self.fifth_image = self.exit_menu_image.subsample(50, 50)  # resize image using subsample
             self.close_button = Button(self.menu_frame, image=self.fifth_image,
                                        command=self.close_menu).grid(row=0, pady=5,
@@ -203,7 +203,7 @@ with open(full_path, 'w') as csvfile:
     main_frame.grid(row=0, column=0, padx=10, pady=10)
 
     # help button
-    help_image = PhotoImage(file="help.png")
+    help_image = PhotoImage(file="../Project/images/help.png")
     secondary_image = help_image.subsample(60, 60)  # resize image using subsample
     question_mark = Button(main_window, image=secondary_image, command=help_popup)
     question_mark.grid(row=0, column=0, pady=15, sticky=SE, padx=15)
@@ -216,12 +216,12 @@ with open(full_path, 'w') as csvfile:
     Title.grid(row=0, column=0, sticky=N, pady=25)
 
     # image for title
-    image = PhotoImage(file="quiz.png")
+    image = PhotoImage(file="../Project/images/quiz.png")
     original_image = image.subsample(17, 17)  # resize image using subsample
     Label(main_window, image=original_image).grid(row=0, column=0, pady=20.5, sticky=NE, padx=70)
 
     # close window button
-    exit_image = PhotoImage(file="exit.jpg")
+    exit_image = PhotoImage(file="../Project/images/exit.jpg")
     third_image = exit_image.subsample(50, 50)  # resize image using subsample
     Button(main_window, image=third_image, command=main_window.destroy).grid(row=0, column=0,
                                                                              pady=10, sticky=NW, padx=10)
