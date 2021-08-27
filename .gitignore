@@ -131,3 +131,4 @@ dmypy.json
 
 
 .idea/
+.csv #to ignore files created by math quiz
