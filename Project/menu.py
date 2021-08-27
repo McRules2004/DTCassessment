@@ -1,5 +1,6 @@
 from OtherCompontents import helpButton, GameScreen, exitButton, create_title
 from tkinter import *
+from datetime import datetime
 
 
 class Menu:
@@ -38,9 +39,10 @@ class Menu:
         self.menu_frame.grid_remove()
 
     def startGame(self):
-        print("start Game")
         self.close_menu()
-        # filename
-        print("game screen")
-        GameScreen(self.main_window, None)
-        print("end game screen")
+        name = self.name_entry.get()
+        if name != "":
+            filename = name + datetime.now().strftime("%m.%d.%Y,%H:%M:%S") + '.csv'
+        else:
+            filename = None
+        GameScreen(self.main_window, filename)

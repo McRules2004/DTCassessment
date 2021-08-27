@@ -75,9 +75,14 @@ class GameScreen:
     def write(self, input):
         if self.file_name is None:
             return
-        with open(self.file_name, 'a') as csvfile:
-            file_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-            file_writer.writerow([self.round_number, self.question.to_short_string(), self.question.solution(), input])
+        try:
+            with open(self.file_name, 'a') as csvfile:
+                file_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+                file_writer.writerow([self.round_number, self.question.to_short_string(), self.question.solution(), input])
+        except IOError:
+            with open(self.file_name, 'w') as csvfile:
+                file_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+                file_writer.writerow([self.round_number, self.question.to_short_string(), self.question.solution(), input])
 
     def setQuestion(self):
         self.question = Question(self.round_number)
