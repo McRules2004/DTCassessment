@@ -89,7 +89,7 @@ def createMenu(main_window):
     name_entry.grid(column=4, row=2, columnspan=3)
 
     # Start Game Button
-    start = Button(menu_frame, text="Start Game", fg="Black", bg="White")
+    start = Button(menu_frame, text="Start Game", fg="Black", bg="White", command=lambda:startGame(menu_frame))
     start.grid(column=4, row=4, columnspan=3, pady=(5, 0))
 
     # Add additional frames for formatting
@@ -100,6 +100,13 @@ def createMenu(main_window):
     extra_frame3 = Frame(menu_frame, height=205, bg="grey")
     extra_frame3.grid(column=10, row=8)
 
+    return menu_frame
+
+def close_menu(menu):
+    menu.destroy()
+
+def startGame(menu):
+    close_menu(menu)
 
 # create GUI
 main_window = Tk()
@@ -109,6 +116,6 @@ main_window.title("Maths Quiz")
 main_window.config(bg="black")
 main_window.resizable(False, False)
 
-createMenu(main_window)
+menu = createMenu(main_window)
 
 main_window.mainloop()
