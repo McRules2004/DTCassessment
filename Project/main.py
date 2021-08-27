@@ -6,7 +6,8 @@ V2
 """
 
 from tkinter import *
-
+import csv
+from question import Question
 
 class Help:
     def __init__(self, main_window):
@@ -40,6 +41,40 @@ class Help:
         self.main_window.deiconify()  # making main window visible
         self.help_box.destroy()
 
+class GameScreen:
+    def __init__(self, main_window, file_name):
+        self.file_name = file_name
+        self.round_number = 1
+        self.question = None
+        self.main_window = main_window
+        # Create Frame inside main window
+        self.game_frame = Frame(main_window, width=680, height=405, bg="gray")
+        self.game_frame.grid(row=0, column=0, padx=10, pady=10)
+        self.game_frame.grid_propagate(0)
+        # Add title, exit button and help button
+        self.title = create_title(self.game_frame)
+        exitButton(self.game_frame)
+        helpButton(self.game_frame)
+        # Question label
+        self.question_label = Label(self.game_frame, text=self.question, fg="white", bg="grey")
+        self.answer_entry = Entry(self.game_frame, fg="black", width=10)
+        self.question_label.grid(column=3, row=1, columnspan=5, pady=5)
+        self.answer_entry.grid(column=4, row=2, columnspan=3)
+        # Button
+        self.enter = Button(self.game_frame, text="Enter", fg="Black", bg="White")
+        self.enter.grid(column=4, row=4, columnspan=3, pady=(5, 0))
+        # Add additional frames for formatting
+        self.extra_frame1 = Frame(self.game_frame, width=200, height=405, bg="grey")
+        self.extra_frame1.grid(column=1, row=0, rowspan=10, columnspan=2)
+        self.extra_frame2 = Frame(self.game_frame, width=242, height=405, bg="grey")
+        self.extra_frame2.grid(column=9, row=0, rowspan=10)
+        self.extra_frame3 = Frame(self.game_frame, height=205, bg="grey")
+        self.extra_frame3.grid(column=10, row=8)
+        self.setQuestion()
+
+    def setQuestion(self):
+        self.question = Question(self.round_number)
+        self.question_label.configure(text=self.question.to_string())
 
 # help box popup
 def help_popup(window):
@@ -64,19 +99,23 @@ def helpButton(frame):
     help_button.grid(row=9, column=10)
 
 
+def create_title(frame):
+    title_image = PhotoImage(file="images/quiz.png")
+    title_image2 = title_image.subsample(17, 17)  # resize image using subsample
+    title = Label(frame, image=title_image2, text="Maths Quiz", font="Times 30 italic bold", fg="blue",
+                  compound=RIGHT)
+    title.photo = title_image2
+    title.grid(row=0, column=3, columnspan=5, pady=(10, 0))
+    return title
+
+
 def createMenu(main_window):
     # Create Frame inside main window
     menu_frame = Frame(main_window, width=680, height=405, bg="gray")
     menu_frame.grid(row=0, column=0, padx=10, pady=10)
     menu_frame.grid_propagate(0)
 
-    # title
-    title_image = PhotoImage(file="images/quiz.png")
-    title_image2 = title_image.subsample(17, 17)  # resize image using subsample
-    title = Label(menu_frame, image=title_image2, text="Maths Quiz", font="Times 30 italic bold", fg="blue",
-                  compound=RIGHT)
-    title.photo = title_image2
-    title.grid(row=0, column=3, columnspan=5, pady=(10, 0))
+    title = create_title(menu_frame)
 
     # Help & Exit buttons
     helpButton(menu_frame)
@@ -89,7 +128,7 @@ def createMenu(main_window):
     name_entry.grid(column=4, row=2, columnspan=3)
 
     # Start Game Button
-    start = Button(menu_frame, text="Start Game", fg="Black", bg="White", command=lambda:startGame(menu_frame))
+    start = Button(menu_frame, text="Start Game", fg="Black", bg="White", command=lambda:startGame(menu_frame, main_window))
     start.grid(column=4, row=4, columnspan=3, pady=(5, 0))
 
     # Add additional frames for formatting
@@ -105,8 +144,10 @@ def createMenu(main_window):
 def close_menu(menu):
     menu.destroy()
 
-def startGame(menu):
+def startGame(menu, main_window):
     close_menu(menu)
+    file_name = "text.csv"
+    GameScreen(main_window, file_name)
 
 # create GUI
 main_window = Tk()
