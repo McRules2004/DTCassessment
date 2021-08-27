@@ -77,6 +77,11 @@ class GameScreen:
         self.answer_entry.config(validate="key", validatecommand=(registration, '%P'))
         self.setQuestion()
 
+    def write(self, input):
+        with open(self.file_name, 'a') as csvfile:
+            file_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+            file_writer.writerow([self.round_number, self.question.to_short_string(), self.question.solution(), input])
+
     def setQuestion(self):
         self.question = Question(self.round_number)
         self.question_label.configure(text=self.question.to_string())
@@ -86,6 +91,7 @@ class GameScreen:
             answer = self.answer_entry.get()
             if answer == "" or answer == "-":
                 return
+            self.write(answer)
             self.answer_entry.delete(0, END)
             self.answer_entry.grid_remove()
             self.enter.configure(text="Next Question!")
