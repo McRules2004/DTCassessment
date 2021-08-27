@@ -19,7 +19,7 @@ def helpButton(frame):
     help_image2 = help_image.subsample(60, 60)  # resize image using subsample
     help_button = Button(frame, image=help_image2)#, command=help_popup)
     help_button.photo = help_image2
-    help_button.grid(row=10, column=10)
+    help_button.grid(row=9, column=10)
 
 def createMenu(main_window):
     # Create Frame inside main window
@@ -47,6 +47,14 @@ def createMenu(main_window):
     # Start Game Button
     start = Button(menu_frame, text="Start Game", fg="Black", bg="White")
     start.grid(column=4, row=4, columnspan=3, pady=(5, 0))
+
+    # Add additional frames for formatting
+    extra_frame1 = Frame(menu_frame, width=200, height=405, bg="grey")
+    extra_frame1.grid(column=1, row=0, rowspan=10, columnspan=2)
+    extra_frame2 = Frame(menu_frame, width=242, height=405, bg="grey")
+    extra_frame2.grid(column=9, row=0, rowspan=10)
+    extra_frame3 = Frame(menu_frame, height=205, bg="grey")
+    extra_frame3.grid(column=10, row=8)
 
 # create GUI
 main_window = Tk()
