@@ -91,7 +91,10 @@ class GameScreen:
             self.write(answer)
             self.answer_entry.delete(0, END)
             self.answer_entry.grid_remove()
-            self.enter.configure(text="Next Question!")
+            if self.round_number < 10:
+                self.enter.configure(text="Next Question!")
+            else:
+                self.enter.configure(text="End Game!")
             self.answer_label.grid()
             if self.question.checks(answer): #true/correct
                 self.answer_label.configure(text="Correct!", fg="green")
