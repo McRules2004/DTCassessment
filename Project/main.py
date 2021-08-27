@@ -96,6 +96,9 @@ class GameScreen:
                 self.answer_label.configure(text="Incorrect!", fg="red")
         else:
             self.round_number += 1
+            if self.round_number > 10:
+                self.game_frame.destroy()
+                return
             self.setQuestion()
             self.answer_entry.grid()
             self.answer_label.grid_remove()
