@@ -23,7 +23,7 @@ class Question:
             return self.first_digit - self.second_digit
 
     def checks(self, answer):
-        return self.solution() == answer
+        return self.solution() == int(answer)
 
     def to_string(self):
         return "Question {}: {} {} {} =".format(self.questionNum, self.first_digit, self.operator, self.second_digit)

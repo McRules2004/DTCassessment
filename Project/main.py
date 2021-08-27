@@ -82,14 +82,24 @@ class GameScreen:
         self.question_label.configure(text=self.question.to_string())
 
     def answer_question(self):
-        answer = self.answer_entry.get()
-        self.answer_entry.delete(0, END)
-        self.answer_entry.grid_remove()
-        self.answer_label.grid()
-        if self.question.checks(answer): #true/correct
-            self.answer_label.configure(text="Correct!", fg="green")
+        if self.answer_entry.winfo_ismapped():
+            answer = self.answer_entry.get()
+            if answer == "" or answer == "-":
+                return
+            self.answer_entry.delete(0, END)
+            self.answer_entry.grid_remove()
+            self.enter.configure(text="Next Question!")
+            self.answer_label.grid()
+            if self.question.checks(answer): #true/correct
+                self.answer_label.configure(text="Correct!", fg="green")
+            else:
+                self.answer_label.configure(text="Incorrect!", fg="red")
         else:
-            self.answer_label.configure(text="Incorrect!", fg="red")
+            self.round_number += 1
+            self.setQuestion()
+            self.answer_entry.grid()
+            self.answer_label.grid_remove()
+            self.enter.configure(text="Enter")
 
     def callback(self, input):
         if input.isdigit():
