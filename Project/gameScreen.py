@@ -1,38 +1,6 @@
 from tkinter import *
 import csv
-from question import Question
-
-class Help:
-    def __init__(self, main_window):
-        self.main_window = main_window
-        background = "grey"
-        # making a popup and removing the main window
-        self.help_box = Toplevel()
-        self.help_box.title("Help")
-        main_window.withdraw()
-        self.help_box.protocol('WM_DELETE_WINDOW', self.close_help)
-
-        # design for the popup
-        self.help_frame = Frame(self.help_box, width=300, bg=background)
-        self.help_frame.grid()
-        self.how_heading = Label(self.help_frame, text="Help/Instructions",
-                                 font="arial 20 bold underline", bg=background, fg="black")
-        self.how_heading.grid(row=0)
-        self.help_text = Label(self.help_frame, text="", justify=LEFT,
-                               width=40, bg=background, wrap=250)
-        self.help_text.grid(row=1, )
-
-        # close the popup button making
-        self.exit_help_image = PhotoImage(file="../Project/images/exit.jpg")
-        self.forth_image = self.exit_help_image.subsample(50, 50)  # resize image using subsample
-        self.close_button = Button(self.help_frame, image=self.forth_image,
-                                   command=self.close_help).grid(row=0, pady=5,
-                                                                 padx=5, sticky=NW)
-
-    # function to close help popup
-    def close_help(self):
-        self.main_window.deiconify()  # making main window visible
-        self.help_box.destroy()
+from Project import question, help, createTitle, exitButton, helpButton
 
 class GameScreen:
     def __init__(self, main_window, file_name):
@@ -46,9 +14,9 @@ class GameScreen:
         self.game_frame.grid(row=0, column=0, padx=10, pady=10)
         self.game_frame.grid_propagate(0)
         # Add title, exit button and help button
-        self.title = create_title(self.game_frame)
-        exitButton(self.game_frame, self.main_window)
-        helpButton(self.game_frame, self.main_window)
+        self.title = createTitle.create_title(self.game_frame)
+        exitButton.exitButton(self.game_frame, self.main_window)
+        helpButton.helpButton(self.game_frame, self.main_window)
         # Question label
         self.question_label = Label(self.game_frame, text=self.question, fg="white", bg="grey")
         self.question_label.grid(column=3, row=1, columnspan=5, pady=5)
@@ -85,7 +53,7 @@ class GameScreen:
                 file_writer.writerow([self.round_number, self.question.to_short_string(), self.question.solution(), input])
 
     def setQuestion(self):
-        self.question = Question(self.round_number)
+        self.question = question.Question(self.round_number)
         self.question_label.configure(text=self.question.to_string())
 
     def answer_question(self):
@@ -125,35 +93,3 @@ class GameScreen:
         elif input == "":
             return True
         return False
-
-# help box popup
-def help_popup(window):
-    get_help = Help(window)
-    get_help.help_text.configure(text="Help Text Here",
-                                 fg="white", font=("arial", "14"))
-
-
-def exitButton(frame, window):
-    exit_image = PhotoImage(file="images/exit.jpg")
-    exit_image2 = exit_image.subsample(50, 50)  # resize image using subsample
-    exit_button = Button(frame, image=exit_image2, command=window.destroy)
-    exit_button.photo = exit_image2
-    exit_button.grid(row=0, column=0, padx=2, pady=2, sticky=N)
-
-
-def helpButton(frame, window):
-    help_image = PhotoImage(file="images/help.png")
-    help_image2 = help_image.subsample(60, 60)  # resize image using subsample
-    help_button = Button(frame, image=help_image2, command=lambda:help_popup(window))
-    help_button.photo = help_image2
-    help_button.grid(row=9, column=10)
-
-
-def create_title(frame):
-    title_image = PhotoImage(file="images/quiz.png")
-    title_image2 = title_image.subsample(17, 17)  # resize image using subsample
-    title = Label(frame, image=title_image2, text="Maths Quiz", font="Times 30 italic bold", fg="blue",
-                  compound=RIGHT)
-    title.photo = title_image2
-    title.grid(row=0, column=3, columnspan=5, pady=(10, 0))
-    return title

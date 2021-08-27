@@ -1,4 +1,4 @@
-from OtherCompontents import helpButton, GameScreen, exitButton, create_title
+from Project import helpButton, gameScreen, exitButton, createTitle
 from tkinter import *
 from datetime import datetime
 
@@ -10,11 +10,11 @@ class Menu:
         self.menu_frame = Frame(self.main_window, width=680, height=405, bg="gray")
         self.menu_frame.grid(row=0, column=0, padx=10, pady=10)
         self.menu_frame.grid_propagate(0)
-        self.title = create_title(self.menu_frame)
+        self.title = createTitle.create_title(self.menu_frame)
 
         # Help & Exit buttons
-        helpButton(self.menu_frame, self.main_window)
-        exitButton(self.menu_frame, self.main_window)
+        helpButton.helpButton(self.menu_frame, self.main_window)
+        exitButton.exitButton(self.menu_frame, self.main_window)
 
         # Ask for players name
         self.name_label = Label(self.menu_frame, text="Please enter your name below", fg="white", bg="grey")
@@ -45,4 +45,4 @@ class Menu:
             filename = name + datetime.now().strftime("%m.%d.%Y,%H:%M:%S") + '.csv'
         else:
             filename = None
-        GameScreen(self.main_window, filename)
+        gameScreen.GameScreen(self.main_window, filename)
