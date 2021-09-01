@@ -42,7 +42,7 @@ class Menu:
         self.close_menu()
         name = self.name_entry.get()
         if name != "":
-            filename = name + datetime.now().strftime("%m.%d.%Y,%H:%M:%S") + '.csv'
+            filename = name + datetime.now().strftime("%m.%d.%Y,%H,%M,%S") + '.csv'
         else:
             filename = None
         gameScreen.GameScreen(self.main_window, filename)

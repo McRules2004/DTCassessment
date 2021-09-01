@@ -1,5 +1,6 @@
 from tkinter import *
 
+
 def exitButton(frame, window):
     exit_image = PhotoImage(file="images/exit.jpg")
     exit_image2 = exit_image.subsample(50, 50)  # resize image using subsample

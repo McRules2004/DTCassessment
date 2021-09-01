@@ -6,6 +6,7 @@ V1
 """
 import random
 
+
 class Question:
     def __init__(self, questionNum):
         self.questionNum = questionNum

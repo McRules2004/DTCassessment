@@ -2,6 +2,7 @@ from tkinter import *
 import csv
 from Project import question, help, createTitle, exitButton, helpButton
 
+
 class GameScreen:
     def __init__(self, main_window, file_name):
         print("start game screen init")
@@ -46,11 +47,13 @@ class GameScreen:
         try:
             with open(self.file_name, 'a') as csvfile:
                 file_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-                file_writer.writerow([self.round_number, self.question.to_short_string(), self.question.solution(), input])
+                file_writer.writerow(
+                    [self.round_number, self.question.to_short_string(), self.question.solution(), input])
         except IOError:
             with open(self.file_name, 'w') as csvfile:
                 file_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-                file_writer.writerow([self.round_number, self.question.to_short_string(), self.question.solution(), input])
+                file_writer.writerow(
+                    [self.round_number, self.question.to_short_string(), self.question.solution(), input])
 
     def setQuestion(self):
         self.question = question.Question(self.round_number)
@@ -69,7 +72,7 @@ class GameScreen:
             else:
                 self.enter.configure(text="End Game!")
             self.answer_label.grid()
-            if self.question.checks(answer): #true/correct
+            if self.question.checks(answer):  # true/correct
                 self.answer_label.configure(text="Correct!", fg="green")
             else:
                 self.answer_label.configure(text="Incorrect!", fg="red")
