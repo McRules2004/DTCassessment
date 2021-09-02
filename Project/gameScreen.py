@@ -38,6 +38,7 @@ class GameScreen:
         self.extra_frame3.grid(column=10, row=8)
         registration = self.game_frame.register(self.callback)
         self.answer_entry.config(validate="key", validatecommand=(registration, '%P'))
+        self.correct_answer = Label(self.game_frame, text=None, fg="white", bg="gray")
         self.setQuestion()
         print("end game screen inits")
 
@@ -67,6 +68,8 @@ class GameScreen:
             self.write(answer)
             self.answer_entry.delete(0, END)
             self.answer_entry.grid_remove()
+            self.correct_answer.configure(text=self.question.solution())
+            self.correct_answer.grid(column=6, row=1, sticky=E)
             if self.round_number < 10:
                 self.enter.configure(text="Next Question!")
             else:
@@ -84,6 +87,7 @@ class GameScreen:
             self.setQuestion()
             self.answer_entry.grid()
             self.answer_label.grid_remove()
+            self.correct_answer.grid_remove()
             self.enter.configure(text="Enter")
 
     def callback(self, input):
