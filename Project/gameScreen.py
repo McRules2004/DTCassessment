@@ -32,8 +32,8 @@ class GameScreen:
         # Add additional frames for formatting
         self.extra_frame1 = Frame(self.game_frame, width=200, height=405, bg="grey")
         self.extra_frame1.grid(column=1, row=0, rowspan=10, columnspan=2)
-        self.extra_frame2 = Frame(self.game_frame, width=242, height=405, bg="grey")
-        self.extra_frame2.grid(column=9, row=0, rowspan=10)
+        self.extra_frame2 = Frame(self.game_frame, width=190, height=405, bg="grey")
+        self.extra_frame2.grid(column=8, row=0, rowspan=10)
         self.extra_frame3 = Frame(self.game_frame, height=205, bg="grey")
         self.extra_frame3.grid(column=10, row=8)
         registration = self.game_frame.register(self.callback)
