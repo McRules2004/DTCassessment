@@ -1,6 +1,7 @@
 from tkinter import *
 import csv
-from Project import question, help, createTitle, exitButton, helpButton
+from Project import question, help, createTitle, exitButton, helpButton, final
+
 
 
 class GameScreen:
@@ -83,6 +84,7 @@ class GameScreen:
             self.round_number += 1
             if self.round_number > 10:
                 self.game_frame.destroy()
+                final.Final(self.main_window,self.file_name)
                 return
             self.setQuestion()
             self.answer_entry.grid()
