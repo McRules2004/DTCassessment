@@ -1,5 +1,13 @@
+"""Help class which will display the help window.
+window with instructions
+Joel McKinnon
+September 2021
+"""
+# imports
 from tkinter import *
 
+
+# class containing help frame
 class Help:
     def __init__(self, main_window):
         self.main_window = main_window

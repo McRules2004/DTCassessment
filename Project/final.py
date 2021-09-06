@@ -1,8 +1,14 @@
+""" final frame, thank you screen
+answers have been saved
+Joel McKinnon
+September 2021
+"""
+# imports
 from Project import createTitle, finalCloseButton, exitButton
 from tkinter import *
-from datetime import datetime
 
 
+# final class, displaying final frame
 class Final:
     def __init__(self, main_window, file_name):
         self.file_name = file_name
@@ -13,24 +19,22 @@ class Final:
         self.final_frame.grid_propagate(0)
         self.title = createTitle.create_title(self.final_frame)
 
-        # Help & Exit buttons
+        # both Exit buttons
         finalCloseButton.closeButton(self.final_frame, self.main_window)
         exitButton.exitButton(self.final_frame, self.main_window)
 
-        # Ask for players name
-        self.name_label = Label(self.final_frame, text="Thanks for Playing", fg="white", bg="grey")
-
+        # thanks for playing
+        self.final_label = Label(self.final_frame, text="Thanks for Playing", fg="white", bg="grey")
+        # checking whether user decided to save file
         if self.file_name is None:
-            self.name_label2 = Label(self.final_frame, text=None, fg="white", bg="grey")
+            self.final_label2 = Label(self.final_frame, text=None, fg="white", bg="grey")  # user didnt save
         else:
-            self.name_label2 = Label(self.final_frame, text="Your Answers have been saved ", fg="white", bg="grey")
+            # user saved file
+            self.final_label2 = Label(self.final_frame, text="Your Answers have been saved ", fg="white", bg="grey")
+        # placing new labels into grid
+        self.final_label.grid(column=3, row=1, columnspan=5, pady=5)
+        self.final_label2.grid(column=3, row=2, columnspan=5, pady=5)
 
-        self.name_label.grid(column=3, row=1, columnspan=5, pady=5)
-        self.name_label2.grid(column=3, row=2, columnspan=5, pady=5)
-
-        print("BEFORE")
-        print("MID")
-        print("AFTER")
         # Add additional frames for formatting
         self.extra_frame1 = Frame(self.final_frame, width=200, height=405, bg="grey")
         self.extra_frame1.grid(column=1, row=0, rowspan=10, columnspan=2)
