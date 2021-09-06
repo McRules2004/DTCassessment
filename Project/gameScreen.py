@@ -46,12 +46,12 @@ class GameScreen:
     def write(self, input):
         if self.file_name is None:
             return
-        if not os.path.exists(self.file_name):
-            with open(self.file_name, 'w') as csvfile:
+        if not os.path.exists("csv_files/"+self.file_name):
+            with open("csv_files/"+self.file_name, 'w') as csvfile:
                 file_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
                 file_writer.writerow(['QuestionNumber', 'Question', 'Correct Answer', 'Inputted Answer'])
 
-        with open(self.file_name, 'a') as csvfile:
+        with open("csv_files/"+self.file_name, 'a') as csvfile:
             file_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
 
             file_writer.writerow(
