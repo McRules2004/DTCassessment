@@ -27,6 +27,9 @@ class Menu:
         self.start = Button(self.menu_frame, text="Start Game", fg="Black", bg="White", command=self.startGame)
         print("MID")
         self.start.grid(column=4, row=4, columnspan=3, pady=(5, 0))
+        self.inform = Label(self.menu_frame, text="for answers to save you must entire your name\n otherwise they WILL NOT be saved",
+                            fg="white", bg="gray")
+        self.inform.grid(row=5, column=3, columnspan=5)
         print("AFTER")
         # Add additional frames for formatting
         self.extra_frame1 = Frame(self.menu_frame, width=200, height=405, bg="grey")
