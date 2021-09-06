@@ -1,5 +1,6 @@
 from Project import helpButton, gameScreen, exitButton, createTitle
 from tkinter import *
+
 from datetime import datetime
 
 
@@ -34,6 +35,8 @@ class Menu:
         self.extra_frame2.grid(column=8, row=0, rowspan=10)
         self.extra_frame3 = Frame(self.menu_frame, height=205, bg="grey")
         self.extra_frame3.grid(column=10, row=8)
+        registration = self.menu_frame.register(self.callback)
+        self.name_entry.config(validate="key", validatecommand=(registration, '%P'))
 
     def close_menu(self):
         self.menu_frame.grid_remove()
@@ -46,3 +49,10 @@ class Menu:
         else:
             filename = None
         gameScreen.GameScreen(self.main_window, filename)
+
+    def callback(self,input):
+        name = ["#", "<", "$", "+", "%", ">", "!", "'", '"', "&", "*", "|", "{", "}", "?", "=", "/", ":", "\\", " ", "@"]
+        for i in name:
+            if i in input:
+                return False
+        return True
