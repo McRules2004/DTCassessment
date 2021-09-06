@@ -1,7 +1,7 @@
 from tkinter import *
 import csv
 from Project import question, help, createTitle, exitButton, helpButton, final
-
+import os
 
 
 class GameScreen:
@@ -46,16 +46,16 @@ class GameScreen:
     def write(self, input):
         if self.file_name is None:
             return
-        try:
-            with open(self.file_name, 'a') as csvfile:
-                file_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-                file_writer.writerow(
-                    [self.round_number, self.question.to_short_string(), self.question.solution(), input])
-        except IOError:
+        if not os.path.exists(self.file_name):
             with open(self.file_name, 'w') as csvfile:
                 file_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-                file_writer.writerow(
-                    [self.round_number, self.question.to_short_string(), self.question.solution(), input])
+                file_writer.writerow(['QuestionNumber', 'Question', 'Correct Answer', 'Inputted Answer'])
+
+        with open(self.file_name, 'a') as csvfile:
+            file_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+
+            file_writer.writerow(
+                [self.round_number, self.question.to_short_string(), self.question.solution(), input])
 
     def setQuestion(self):
         self.question = question.Question(self.round_number)
