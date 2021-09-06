@@ -19,7 +19,7 @@ class Menu:
         self.menu_frame.grid_propagate(0)
         self.title = createTitle.create_title(self.menu_frame)
         # Help & Exit buttons
-        helpButton.helpButton(self.menu_frame, self.main_window)
+        helpButton.help_button(self.menu_frame, self.main_window)
         exitButton.exitButton(self.menu_frame, self.main_window)
         # Ask for players name and name entry
         self.name_label = Label(self.menu_frame, text="Please enter your name below", fg="white", bg="grey")
@@ -27,7 +27,7 @@ class Menu:
         self.name_label.grid(column=3, row=1, columnspan=5, pady=5)
         self.name_entry.grid(column=4, row=2, columnspan=3)
         # Start Game Button
-        self.start = Button(self.menu_frame, text="Start Game", fg="Black", bg="White", command=self.startGame)
+        self.start = Button(self.menu_frame, text="Start Game", fg="Black", bg="White", command=self.start_game)
         self.start.grid(column=4, row=4, columnspan=3, pady=(5, 0))
         # label to make sure users are aware does not save without name
         self.inform = Label(self.menu_frame,
@@ -50,7 +50,7 @@ class Menu:
         self.menu_frame.grid_remove()
 
     # function to start the quiz
-    def startGame(self):
+    def start_game(self):
         self.close_menu()
         # getting name from entry box
         name = self.name_entry.get()
@@ -61,10 +61,10 @@ class Menu:
         gameScreen.GameScreen(self.main_window, filename)
 
     # callback function to validate name entry
-    def callback2(self, input):
+    def callback2(self, entry_box):
         name = ["#", "<", "$", "+", "%", ">", "!", "'", '"', "&", "*", "|", "{", "}", "?", "=", "/", ":", "\\", " ",
                 "@"]  # list of invalid characters
         for i in name:
-            if i in input:
+            if i in entry_box:
                 return False
         return True

@@ -4,7 +4,7 @@ Joel McKinnon
 September 2021
 """
 # imports
-from Project import createTitle, finalCloseButton, exitButton
+from Project import createTitle, final_close_button, exitButton
 from tkinter import *
 
 
@@ -20,14 +20,14 @@ class Final:
         self.title = createTitle.create_title(self.final_frame)
 
         # both Exit buttons
-        finalCloseButton.closeButton(self.final_frame, self.main_window)
+        final_close_button.close_button(self.final_frame, self.main_window)
         exitButton.exitButton(self.final_frame, self.main_window)
 
         # thanks for playing
         self.final_label = Label(self.final_frame, text="Thanks for Playing", fg="white", bg="grey")
         # checking whether user decided to save file
         if self.file_name is None:
-            self.final_label2 = Label(self.final_frame, text=None, fg="white", bg="grey")  # user didnt save
+            self.final_label2 = Label(self.final_frame, text=None, fg="white", bg="grey")  # user didn't save
         else:
             # user saved file
             self.final_label2 = Label(self.final_frame, text="Your Answers have been saved ", fg="white", bg="grey")

@@ -6,7 +6,7 @@ September 2021
 # imports
 from tkinter import *
 import csv
-from Project import question, help, createTitle, exitButton, helpButton, final
+from Project import question, createTitle, exitButton, helpButton, final
 import os
 
 
@@ -25,7 +25,7 @@ class GameScreen:
         # Add title, exit button and help button
         self.title = createTitle.create_title(self.game_frame)
         exitButton.exitButton(self.game_frame, self.main_window)
-        helpButton.helpButton(self.game_frame, self.main_window)
+        helpButton.help_button(self.game_frame, self.main_window)
         # Question label
         self.question_label = Label(self.game_frame, text=self.question, fg="white", bg="grey")
         self.question_label.grid(column=3, row=1, columnspan=5, pady=5)
@@ -51,10 +51,10 @@ class GameScreen:
         self.answer_entry.config(validate="key", validatecommand=(registration, '%P'))
         # correct answer label
         self.correct_answer = Label(self.game_frame, text=None, fg="white", bg="gray")
-        self.setQuestion()
+        self.set_question()
 
     # csv file writing function
-    def write(self, input):
+    def write(self, enter):
         if self.file_name is None:
             return
         if not os.path.exists("csv_files/" + self.file_name):  # checking to see if file is created
@@ -68,10 +68,10 @@ class GameScreen:
 
             file_writer.writerow(
                 [self.round_number, self.question.to_short_string(), self.question.solution(),
-                 input])  # adding new line to csv file
+                 enter])  # adding new line to csv file
 
     # getting question, and configuring label to display new question
-    def setQuestion(self):
+    def set_question(self):
         self.question = question.Question(self.round_number)
         self.question_label.configure(text=self.question.to_string())
 
@@ -82,7 +82,7 @@ class GameScreen:
             if answer == "" or answer == "-":  # making sure its valid input
                 return
             self.write(answer)  # adding to csv file
-            # removing the question boxs and adding the answer boxes/button
+            # removing the question boxes and adding the answer boxes/button
             self.answer_entry.delete(0, END)
             self.answer_entry.grid_remove()
             self.correct_answer.configure(text=self.question.solution())
@@ -105,20 +105,20 @@ class GameScreen:
                 final.Final(self.main_window, self.file_name)  # show the Final class
                 return
             # if not round 10 re-place the question boxes on the frame
-            self.setQuestion()
+            self.set_question()
             self.answer_entry.grid()
             self.answer_label.grid_remove()
             self.correct_answer.grid_remove()
             self.enter.configure(text="Enter")
 
     # validation function for entry box
-    def callback(self,input):
-        if input.isdigit():
+    def callback(self, entry_box):
+        if entry_box.isdigit():
             return True
-        elif input.startswith("--"):
+        elif entry_box.startswith("--"):
             return False
-        elif input.startswith("-"):
+        elif entry_box.startswith("-"):
             return True
-        elif input == "":
+        elif entry_box == "":
             return True
         return False

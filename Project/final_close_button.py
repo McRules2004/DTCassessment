@@ -8,7 +8,7 @@ from tkinter import *
 
 
 # function to close window
-def closeButton(frame, window):
+def close_button(frame, window):
     # close window button
-    close_button = Button(frame, text="Close Quiz", command=window.destroy)
-    close_button.grid(row=4, column=3, columnspan=5)
+    close_button2 = Button(frame, text="Close Quiz", command=window.destroy)
+    close_button2.grid(row=4, column=3, columnspan=5)
